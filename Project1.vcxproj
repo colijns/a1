@@ -127,10 +127,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\Game\EntityBullet.h" />
-    <ClInclude Include="..\Game\EntityPlant.h" />
-    <ClInclude Include="..\Game\EntitySunshine.h" />
-    <ClInclude Include="..\Game\EntityZombie.h" />
+    <ClInclude Include="..\Game\Data.h" />
+    <ClInclude Include="..\Game\Bullet.h" />
+    <ClInclude Include="..\Game\Plant.h" />
+    <ClInclude Include="..\Game\Sunshine.h" />
+    <ClInclude Include="..\Game\Zombie.h" />
     <ClInclude Include="..\Game\GameApp.h" />
     <ClInclude Include="..\Game\GameOverScene.h" />
     <ClInclude Include="..\Game\GameReadyScene.h" />
@@ -139,10 +140,10 @@
     <ClInclude Include="..\Game\HRUtil.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Game\EntityBullet.cpp" />
-    <ClCompile Include="..\Game\EntityPlant.cpp" />
-    <ClCompile Include="..\Game\EntitySunshine.cpp" />
-    <ClCompile Include="..\Game\EntityZombie.cpp" />
+    <ClCompile Include="..\Game\Bullet.cpp" />
+    <ClCompile Include="..\Game\Plant.cpp" />
+    <ClCompile Include="..\Game\Sunshine.cpp" />
+    <ClCompile Include="..\Game\Zombie.cpp" />
     <ClCompile Include="..\Game\GameApp.cpp" />
     <ClCompile Include="..\Game\GameOverScene.cpp" />
     <ClCompile Include="..\Game\GameReadyScene.cpp" />

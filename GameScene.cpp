@@ -1,10 +1,10 @@
 #include "GameScene.h"
-#include "DataDef.h"
+#include "Data.h"
 #include "GameApp.h"
-#include "EntityZombie.h"
-#include "EntityPlant.h"
-#include "EntityBullet.h"
-#include "EntitySunshine.h"
+#include "Zombie.h"
+#include "Plant.h"
+#include "Bullet.h"
+#include "Sunshine.h"
 #include "HRUtil.h"
 #include "HREasyxUtil.h"
 #include <stdio.h>  
@@ -53,14 +53,12 @@ void LoadGameRes()
 	loadimage(&imgTopKuang, GetImagePath("kuang.png", szBuffer, bufferSize));
 	loadimage(&imgJiangshitupian, GetImagePath("ZombiesRemaining.jpg", szBuffer, bufferSize));
 
-	// Load all card images with consistent size (50x70)
 	loadimage(&imgPeaShooterCard, GetImagePath("Card/PeaShooterCard.jpg", szBuffer, bufferSize), 50, 70);
 	loadimage(&imgSunFlowerCard, GetImagePath("Card/SunFlowerCard.jpg", szBuffer, bufferSize), 50, 70);
 	loadimage(&imgWallNutCard, GetImagePath("Card/wallNutCard.png", szBuffer, bufferSize), 50, 70);
 	loadimage(&imgSnowShooterCard, GetImagePath("Card/snowShooterCard.png", szBuffer, bufferSize), 50, 70);
 	loadimage(&imgCherryBombCard, GetImagePath("Card/CherryBomb.png", szBuffer, bufferSize), 50, 70);
 	
-	// 辣椒卡片单独设置尺寸，确保完全显示在框内
 	loadimage(&imgJalapenoCard, GetImagePath("Card/jalapeno.png", szBuffer, bufferSize), 50, 70);
 
 	LoadZombieRes();
@@ -148,7 +146,6 @@ COLORREF GetFillColor(int radius)
 
 void InitEntity()
 {
-	// ??????????
 	ReleaseEntity();
 }
 
@@ -163,7 +160,7 @@ int InitGameScene()
 
 void InitGameInfo()
 {
-	gameParams.sunshine = 10000;
+	gameParams.sunshine = 500;
 	gameParams.maxHp = 15;
 	gameParams.killZombieNum = 0;
 }
@@ -191,16 +188,14 @@ int UpdateGameScene()
 
 			for (int cardIndex = 0; cardIndex < PLANT_TYPE_NUM; ++cardIndex)
 			{
-				// 为辣椒卡片(索引5)使用特殊的点击检测区域
 				if (cardIndex == 5) {
 					if ((startCardX + cardIndex * 50 - 10 <= clickX && clickX <= startCardX + cardIndex * 50 - 10 + 50)
 						&& (cardY <= clickY && clickY <= cardY + 70))
 					{
-						// Check if we have enough sunshine for this plant
 						Plant* tempPlant = CreatePlant(cardIndex);
 						if (tempPlant) {
 							int cost = tempPlant->cost;
-							free(tempPlant); // Free the temporary plant
+							free(tempPlant);
 							
 							if (gameParams.sunshine >= cost) {
 								gameParams.lbtnDown = 1;
@@ -217,7 +212,6 @@ int UpdateGameScene()
 					if ((startCardX + cardIndex * 50 <= clickX && clickX <= startCardX + cardIndex * 50 + 50)
 						&& (cardY <= clickY && clickY <= cardY + 70))
 					{
-						// Check if we have enough sunshine for this plant
 						Plant* tempPlant = CreatePlant(cardIndex);
 						if (tempPlant) {
 							int cost = tempPlant->cost;
@@ -280,7 +274,7 @@ int UpdateGameScene()
 
 			if (gameParams.lbtnDown == 1 && gameParams.selectCard >= 0 && gameParams.selectCard < PLANT_TYPE_NUM)
 			{
-				// ?
+				
 				int clickCol = (clickX - 40) / 80;
 				int clickRow = (clickY - 80) / 100;
 
@@ -299,14 +293,12 @@ int UpdateGameScene()
 
 				if (isGridBlocked == 0)
 				{
-					// First verify we have enough sunshine
 					Plant* tempPlant = CreatePlant(gameParams.selectCard);
 					if (tempPlant) {
 						int cost = tempPlant->cost;
 						free(tempPlant);
 						
 						if (gameParams.sunshine >= cost) {
-							// Create the actual plant
 							Plant* pNewPlant = CreatePlant(gameParams.selectCard);
 							if (pNewPlant) {
 								// λ
@@ -324,29 +316,24 @@ int UpdateGameScene()
 								if (pTemp)
 									pTemp->pPrev = gamePlant;
 
-								// Reset selection state
 								gameParams.lbtnDown = 0;
 								gameParams.selectCard = -1;
 								
-								// Deduct the cost
 								gameParams.sunshine -= pNewPlant->cost;
 								
 								printf("Plant placed successfully (remaining sunshine: %d)\n", gameParams.sunshine);
 							}
 						} else {
-							// Not enough sunshine
 							gameParams.lbtnDown = 0;
 							gameParams.selectCard = -1;
 							printf("Not enough sunshine to place plant\n");
 						}
 					} else {
-						// Invalid plant type
 						gameParams.lbtnDown = 0;
 						gameParams.selectCard = -1;
 						printf("Invalid plant type\n");
 					}
 				} else {
-					// Grid already occupied
 					printf("Grid already occupied\n");
 				}
 			}
@@ -511,7 +498,6 @@ int UpdateGameScene()
 						pBullet->y = pCurPlant->y;
 						pBullet->row = pCurPlant->row;
 
-						// ?????
 						PlantBullet* pTemp = gameBullet;
 						gameBullet = pBullet;
 						gameBullet->pNext = pTemp;
@@ -803,7 +789,6 @@ void DrawGameScene()
 
 	setbkmode(TRANSPARENT);
 
-	// Display plant cards with proper spacing
 	putimage(startCardX, cardY, &imgSunFlowerCard);
 	putimage(startCardX + 50 * 1, cardY, &imgPeaShooterCard);
 	putimage(startCardX + 50 * 2, cardY, &imgWallNutCard);
@@ -847,12 +832,10 @@ void DrawGameScene()
 
 	if (gameParams.lbtnDown && gameParams.selectCard >= 0)
 	{
-		// Validate selectCard is within bounds
 		if (gameParams.selectCard < PLANT_TYPE_NUM) {
 			// 所有植物使用相同的选择偏移
 			HRPutImageAlpha(gameParams.mouseX - 35, gameParams.mouseY - 35, GetSelectPlantImage(gameParams.selectCard));
 		} else {
-			// Reset invalid selection
 			gameParams.lbtnDown = 0;
 			gameParams.selectCard = -1;
 			printf("Invalid plant selection detected and reset\n");
