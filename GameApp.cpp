@@ -1,5 +1,5 @@
 #include "GameApp.h"
-#include "DataDef.h"
+#include "Data.h"
 #include "GameScene.h"
 #include "GameOverScene.h"
 #include "GameReadyScene.h"
@@ -249,27 +249,6 @@ char* GetAudioPath(const char* pRes, char* pBuffer, int bufLength)
 	return pBuffer;
 }
 
-
-//检查用户数据是否匹配
-int CheckUserData(const char* username, const char* password)
-{
-	for (int i = 0; i < 100; ++i)
-	{
-		if (strlen(gAppParams.accounts[i]) > 0)
-		{
-			if (strcmp(gAppParams.accounts[i], username) == 0
-				&& strcmp(gAppParams.pwds[i], password) == 0)
-			{
-				return 1;
-			}
-		}
-		else
-		{
-			break;
-		}
-	}
-	return 0;
-}
 
 bool CheckFrameElapse()
 {

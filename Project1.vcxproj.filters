@@ -15,22 +15,19 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Game\EntityBullet.h">
+    <ClInclude Include="..\Game\Bullet.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\Game\EntityPlant.h">
+    <ClInclude Include="..\Game\Plant.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\Game\EntitySunshine.h">
+    <ClInclude Include="..\Game\Sunshine.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\Game\EntityZombie.h">
+    <ClInclude Include="..\Game\Zombie.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\Game\GameApp.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Game\GameOverScene.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\Game\GameReadyScene.h">
@@ -45,18 +42,24 @@
     <ClInclude Include="..\Game\HRUtil.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\Game\Data.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Game\GameOverScene.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Game\EntityBullet.cpp">
+    <ClCompile Include="..\Game\Bullet.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\Game\EntityPlant.cpp">
+    <ClCompile Include="..\Game\Plant.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\Game\EntitySunshine.cpp">
+    <ClCompile Include="..\Game\Sunshine.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\Game\EntityZombie.cpp">
+    <ClCompile Include="..\Game\Zombie.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\Game\GameApp.cpp">
